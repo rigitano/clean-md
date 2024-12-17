@@ -27,24 +27,50 @@
         <div class="side-menu">
             <h2>Commands</h2>
             <div class="category">
-                <div class="category-title">Category A</div>
+                <div class="category-title">Basic Bash</div>
                 <div class="category-items">
-                    <button data-command="echo 'Hello from A1'">echo 'Hello from A1'</button>
-                    <button data-command="ls -la">ls -la</button>
+                    <button data-command="echo hello">echo hello</button>
+                    <button data-command="uname -a">os version</button>
+                    <button data-command="ifconfig">ip and mac</button>
+                    <button data-command="top">running processes</button>
+                    <button data-command="which python">python location</button>
+                    <button data-command="pip list -v">modules locations</button>
+                    <button data-command='printf "%-30s %-10s %-10s %-15s\n" "Name" "Size" "Lines" "Permissions"; for file in .* *; do [ -e "$file" ] || continue; size=$(du -sh "$file" 2>/dev/null | awk "{print \$1}"); perms=$(stat -c "%A" "$file" 2>/dev/null); lines=$( [ -f "$file" ] && wc -l < "$file" || echo "N/A" ); printf "%-30s %-10s %-10s %-15s\n" "$file" "$size" "$lines" "$perms"; done'>list of files</button>
+                    <button data-command="find . -regex '.*sers/Henriq.*.jpg'">search files by name</button>
+                    <button data-command="grep -Rl 'Henrique' .">search files by content</button>
+                    <button data-command="grep -l 'Henrique' *">search <b>lines</b> with certain text</button>
+
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-title">XXXXX</div>
+                <div class="category-items">
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
                 </div>
             </div>
             <div class="category">
-                <div class="category-title">Category B</div>
+                <div class="category-title">XXXXX</div>
                 <div class="category-items">
-                    <button data-command="pwd">pwd</button>
-                    <button data-command="dir">dir</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
                 </div>
             </div>
             <div class="category">
-                <div class="category-title">Category C</div>
+                <div class="category-title">XXXXX</div>
                 <div class="category-items">
-                    <button data-command="date">Item C1 (date)</button>
-                    <button data-command="uname -a">Item C2 (uname -a)</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
+                    <button data-command="xxx">xxx</button>
                 </div>
             </div>
         </div>
