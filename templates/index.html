@@ -35,17 +35,23 @@
                     <button data-command="top">running processes</button>
                     <button data-command="which python">python location</button>
                     <button data-command="pip list -v">modules locations</button>
-                    <button data-command="conda env list">see conda environments</button>
-                    <button data-command="conda create -n my_env python=3.9">create conda environment</button>
+                    <button data-command="xxx">see path variable (and exports to it)</button>
+
+
+
+                    <button data-command="conda env list">see all conda environments</button><!--xxx maybe I should do a script to add python and modules for each env-->
+                    <button data-command="xxx">see all pyenv environments</button>
+                    <button data-command="conda create -n my_env python=3.9">create new conda environment</button>
+                    <button data-command="xxx">create new pyenv environment</button>
                 </div>
             </div>
             <div class="category">
                 <div class="category-title">GIT</div>
                 <div class="category-items">
-                    <button data-command="git init">init</button>
-                    <button data-command="git clone xxx">clone</button>
+                    <button data-command="git init |||||| git clone xxx">init or clone</button>
+                    <button data-command="xxx">pull</button>
                     <button data-command="git add . && git commit -m 'commit message' && git push origin $(git rev-parse --abbrev-ref HEAD)">add, commit and push</button>
-                    <button data-command="git revert HEAD">revert</button>
+                    <button data-command="git revert HEAD">revert or reset</button>
                     <button data-command="git branch">see all branches</button>
                     <button data-command="git branch xxx">create new branch</button>
                     <button data-command="git checkout receivingBranchName && git merge givingBranchName --no-ff">merge</button>
@@ -53,7 +59,15 @@
             </div>
 
 
-
+            <div class="category">
+                <div class="category-title">Search filesystem</div>
+                <div class="category-items">
+                    <button data-command='printf "%-30s %-10s %-10s %-15s\n" "Name" "Size" "Lines" "Permissions"; for file in .* *; do [ -e "$file" ] || continue; size=$(du -sh "$file" 2>/dev/null | awk "{print \$1}"); perms=$(stat -c "%A" "$file" 2>/dev/null); lines=$( [ -f "$file" ] && wc -l < "$file" || echo "N/A" ); printf "%-30s %-10s %-10s %-15s\n" "$file" "$size" "$lines" "$perms"; done'>ls (with extra infos)</button>
+                    <button data-command="find . -regex '.*sers/Henriq.*.jpg'">files by name</button>
+                    <button data-command="grep -Rl 'Henrique' .">files by content</button>
+                    <button data-command="grep -l 'Henrique' *"><b>lines</b> with certain text</button>
+                </div>
+            </div>
 
 
 
