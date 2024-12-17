@@ -27,7 +27,7 @@
         <div class="side-menu">
             <h2>Commands</h2>
             <div class="category">
-                <div class="category-title">Basic Bash</div>
+                <div class="category-title">Environment</div>
                 <div class="category-items">
                     <button data-command="echo hello">echo hello</button>
                     <button data-command="uname -a">os version</button>
@@ -35,44 +35,82 @@
                     <button data-command="top">running processes</button>
                     <button data-command="which python">python location</button>
                     <button data-command="pip list -v">modules locations</button>
-                    <button data-command='printf "%-30s %-10s %-10s %-15s\n" "Name" "Size" "Lines" "Permissions"; for file in .* *; do [ -e "$file" ] || continue; size=$(du -sh "$file" 2>/dev/null | awk "{print \$1}"); perms=$(stat -c "%A" "$file" 2>/dev/null); lines=$( [ -f "$file" ] && wc -l < "$file" || echo "N/A" ); printf "%-30s %-10s %-10s %-15s\n" "$file" "$size" "$lines" "$perms"; done'>list of files</button>
-                    <button data-command="find . -regex '.*sers/Henriq.*.jpg'">search files by name</button>
-                    <button data-command="grep -Rl 'Henrique' .">search files by content</button>
-                    <button data-command="grep -l 'Henrique' *">search <b>lines</b> with certain text</button>
+                    <button data-command="conda env list">see conda environments</button>
+                    <button data-command="conda create -n my_env python=3.9">create conda environment</button>
+                </div>
+            </div>
+            <div class="category">
+                <div class="category-title">GIT</div>
+                <div class="category-items">
+                    <button data-command="git init">init</button>
+                    <button data-command="git clone xxx">clone</button>
+                    <button data-command="git add . && git commit -m 'commit message' && git push origin $(git rev-parse --abbrev-ref HEAD)">add, commit and push</button>
+                    <button data-command="git revert HEAD">revert</button>
+                    <button data-command="git branch">see all branches</button>
+                    <button data-command="git branch xxx">create new branch</button>
+                    <button data-command="git checkout receivingBranchName && git merge givingBranchName --no-ff">merge</button>
+                </div>
+            </div>
 
-                </div>
-            </div>
+
+
+
+
 
             <div class="category">
-                <div class="category-title">XXXXX</div>
-                <div class="category-items">
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                </div>
+            <div class="category-title">Construct Molecules</div>
+            <div class="category-items">
+                <button data-command="xxx">download_and_clean_pdb</button>
+                <button data-command="xxx">xxx create_line</button>
+                <button data-command="xxx">xxx create_tape</button>
+                <button data-command="xxx">xxx create_christal</button>
+                <button data-command="xxx">create_peptide</button>
+                <button data-command="xxx">xxx create_any_molecule</button>
+
             </div>
-            <div class="category">
-                <div class="category-title">XXXXX</div>
-                <div class="category-items">
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                </div>
+        </div>
+
+        <div class="category">
+            <div class="category-title">Construct MD System</div>
+            <div class="category-items">
+                <button data-command="xxx">pdb2molecule_in_solvent</button>
+                <button data-command="xxx">void2peptide_in_solvent</button>
+                <button data-command="xxx">pdb2molecule_in_membrane xxx</button>
+                <button data-command="xxx">pdb2filled_box</button>
+
             </div>
-            <div class="category">
-                <div class="category-title">XXXXX</div>
-                <div class="category-items">
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                    <button data-command="xxx">xxx</button>
-                </div>
+        </div>
+
+        <div class="category">
+            <div class="category-title">Run MD</div>
+            <div class="category-items">
+                <button data-command="xxx">make_realistic</button>
+                <button data-command="xxx">xxx run to see trajectories</button>
+                <button data-command="xxx">xxx run FEP</button>
+
             </div>
+        </div>
+
+        <div class="category">
+            <div class="category-title">MD Analysis</div>
+            <div class="category-items">
+                <button data-command="xxx">Ramachandran plot</button>
+                <button data-command="xxx">DSSP</button>
+                <button data-command="xxx">H bonds</button>
+                <button data-command="xxx">Distance between 2 atoms</button>
+                <button data-command="xxx">Aminoacid phi and psi</button>
+                <button data-command="xxx">RMSD with respect to a reference</button>
+                <button data-command="xxx">Gyration radius</button>
+                <button data-command="xxx">SASA</button>
+                <button data-command="xxx">Quadruopole</button>
+                
+            </div>
+        </div>
+
+
+
+
+            
         </div>
         <div class="main-area">
             <div class="terminal-top-bar">
@@ -93,26 +131,16 @@
 
     <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
     <script>
-        // Determine correct ws or wss
-        var protocol = (window.location.protocol === 'https:') ? 'wss://' : 'ws://';
+        // Determine correct protocol dynamically for WebSocket
+        const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+        const wsUrl = protocol + window.location.host + "/ws";
 
-        // Toggle categories
-        document.querySelectorAll('.category-title').forEach(title => {
-            title.addEventListener('click', () => {
-                const items = title.nextElementSibling;
-                if (items.style.display === 'flex') {
-                    items.style.display = 'none';
-                } else {
-                    items.style.display = 'flex';
-                }
-            });
-        });
-
-        const term = new Terminal({ 
-            cols: 80, 
-            rows: 24, 
-            fontSize:14, 
-            theme: { background: '#1e1e1e' } 
+        // Terminal initialization
+        const term = new Terminal({
+            cols: 80,
+            rows: 24,
+            fontSize: 14,
+            theme: { background: '#1e1e1e', foreground: '#ffffff' }
         });
         term.open(document.getElementById('terminal'));
 
@@ -121,13 +149,17 @@
 
         function connectTerminal(shellType) {
             if (ws) ws.close();
-            ws = new WebSocket(protocol + window.location.host + "/ws");
+            ws = new WebSocket(wsUrl);
+
             ws.onopen = () => {
                 ws.send(shellType);
+                term.write(`\r\nConnected to ${shellType} shell\r\n`);
             };
+
             ws.onmessage = (event) => {
                 term.write(event.data);
             };
+
             ws.onclose = () => {
                 term.write("\r\n*** Disconnected from server ***\r\n");
             };
@@ -142,23 +174,28 @@
         });
 
         document.getElementById('terminalSelector').addEventListener('change', (e) => {
-            // If shell is disabled (unavailable), ignore
-            if (e.target.selectedOptions[0].disabled) {
-                alert("This shell is not available on this system.");
-                // revert to previous selection
-                e.target.value = currentShell;
-                return;
-            }
-            currentShell = e.target.value;
+            const selectedShell = e.target.value;
+            currentShell = selectedShell;
             connectTerminal(currentShell);
         });
 
+        // Safeguard for empty or invalid commands
         document.querySelectorAll('.category-items button').forEach(btn => {
             btn.addEventListener('click', () => {
                 const command = btn.getAttribute('data-command');
-                if (ws && ws.readyState === WebSocket.OPEN) {
+                if (command && ws && ws.readyState === WebSocket.OPEN) {
                     ws.send(command + "\r");
+                } else {
+                    console.error("Invalid command or WebSocket not open");
                 }
+            });
+        });
+
+        // Toggle category visibility
+        document.querySelectorAll('.category-title').forEach(title => {
+            title.addEventListener('click', () => {
+                const items = title.nextElementSibling;
+                items.style.display = (items.style.display === 'flex') ? 'none' : 'flex';
             });
         });
     </script>
