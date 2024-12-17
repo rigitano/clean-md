@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Terminal Interface</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            background-color: #f9f9f9;
+        }
+
+        .sidebar {
+            width: 300px;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            margin: 0 0 20px;
+            font-size: 22px;
+            text-align: center;
+        }
+
+        .category {
+            background-color: #444;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .category h3 {
+            cursor: pointer;
+            margin: 0;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #555;
+            color: #fff;
+            border-radius: 8px 8px 0 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .category h3:hover {
+            background-color: #666;
+        }
+
+        .functions {
+            display: none;
+            background-color: #444;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .functions a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            background-color: #333;
+            border-left: 3px solid transparent;
+            transition: background-color 0.3s ease;
+        }
+
+        .functions a:hover {
+            background-color: #555;
+            border-left: 3px solid #777;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .output-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .output-box {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f4f4f4;
+            padding: 15px;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .output-box-label {
+            position: relative;
+            top: -1px;
+            left: 4px;
+            /*background-color: #f9f9f9;  Matches body background */
+            padding: 0 8px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <div class="category">
+            <h3 onclick="toggleCategory('cat1')">Category 1</h3>
+            <div id="cat1" class="functions">
+                <a href="#" onclick="executeCommand('/function1_1')">List Files</a>
+                <a href="#" onclick="executeCommand('/function1_2')">Show Current Directory</a>
+            </div>
+        </div>
+        <div class="category">
+            <h3 onclick="toggleCategory('cat2')">Category 2</h3>
+            <div id="cat2" class="functions">
+                <a href="#" onclick="executeCommand('/function2_1')">Print Hello</a>
+                <a href="#" onclick="executeCommand('/function2_2')">Show Date</a>
+            </div>
+        </div>
+        <div class="category">
+            <h3 onclick="toggleCategory('cat3')">Category 3</h3>
+            <div id="cat3" class="functions">
+                <a href="#" onclick="executeCommand('/function3_1')">System Info</a>
+                <a href="#" onclick="executeCommand('/function3_2')">Disk Space</a>
+            </div>
+        </div>
+        <a href="#" style="color: #fff; text-align: center; display: block;" onclick="viewLog()">View Log</a>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <h1>Terminal Output</h1>
+        <div class="output-container">
+            <!-- Command Box -->
+            <div>
+                <div class="output-box-label">Command</div>
+                <div class="output-box" id="command-output">
+                    Click a menu item to execute a command.
+                </div>
+            </div>
+            <!-- Output Box -->
+            <div>
+                <div class="output-box-label">Output</div>
+                <div class="output-box" id="stdout-output"></div>
+            </div>
+            <!-- Error Box -->
+            <div>
+                <div class="output-box-label">Error</div>
+                <div class="output-box" id="stderr-output"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle visibility of categories
+        function toggleCategory(categoryId) {
+            const category = document.getElementById(categoryId);
+            category.style.display = (category.style.display === 'block') ? 'none' : 'block';
+        }
+
+        // Execute a command and display the results
+        function executeCommand(route) {
+            fetch(route)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('command-output').innerText = data.command || "-";
+                    document.getElementById('stdout-output').innerText = data.stdout || "-";
+                    document.getElementById('stderr-output').innerText = data.stderr || "-";
+                });
+        }
+
+        // View log content
+        function viewLog() {
+            fetch('/view_log')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('command-output').innerText = "Full Log";
+                    document.getElementById('stdout-output').innerText = data.log || "No log content.";
+                    document.getElementById('stderr-output').innerText = "End of Log";
+                });
+        }
+    </script>
+</body>
+</html>

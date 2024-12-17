@@ -1,0 +1,341 @@
+Timestamp: 2024-12-16 23:12:02.718498
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-16 23:12:13.242763
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-16 23:12:14.550731
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:12:17.698698
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:12:45.534983
+Command: uname -a
+Output:
+
+Error:
+'uname' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:12:58.109982
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:13:35.637076
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:13:38.205655
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:13:39.548387
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:13:40.592622
+Command: uname -a
+Output:
+
+Error:
+'uname' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:13:41.824700
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:13:42.863349
+Command: uname -a
+Output:
+
+Error:
+'uname' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:13:43.863642
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:16:18.263658
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:16:19.794922
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:16:24.517005
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-16 23:16:59.860283
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:23:16.343961
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:23:18.390626
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:31:09.022885
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:31:28.816139
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-16 23:31:38.207379
+Command: uname -a
+Output:
+
+Error:
+'uname' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:31:42.441268
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:41:10.428977
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:41:14.424767
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:41:16.543293
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-16 23:41:22.462260
+Command: uname -a
+Output:
+
+Error:
+'uname' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:41:24.281240
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:46:49.892217
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:46:56.783149
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:46:59.406802
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-16 23:47:07.224466
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-16 23:47:09.025862
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-16 23:47:10.942986
+Command: uname -a
+Output:
+
+Error:
+'uname' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:47:12.761091
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:47:14.569594
+Command: uname -a
+Output:
+
+Error:
+'uname' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-16 23:49:45.508021
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-16 23:49:46.486240
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:06:18.130737
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
