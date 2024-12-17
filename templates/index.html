@@ -1,217 +1,140 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask Terminal Interface</title>
+    <title>Web Terminal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            background-color: #f9f9f9;
-        }
-
-        .sidebar {
-            width: 300px;
-            height: 100vh;
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            overflow-y: auto;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar h2 {
-            margin: 0 0 20px;
-            font-size: 22px;
-            text-align: center;
-        }
-
-        .category {
-            background-color: #444;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .category h3 {
-            cursor: pointer;
-            margin: 0;
-            padding: 15px;
-            font-size: 18px;
-            background-color: #555;
-            color: #fff;
-            border-radius: 8px 8px 0 0;
-            transition: background-color 0.3s ease;
-        }
-
-        .category h3:hover {
-            background-color: #666;
-        }
-
-        .functions {
-            display: none;
-            background-color: #444;
-            border-radius: 0 0 8px 8px;
-        }
-
-        .functions a {
-            display: block;
-            text-decoration: none;
-            color: #fff;
-            padding: 10px 20px;
-            background-color: #333;
-            border-left: 3px solid transparent;
-            transition: background-color 0.3s ease;
-        }
-
-        .functions a:hover {
-            background-color: #555;
-            border-left: 3px solid #777;
-        }
-
-        .content {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background-color: #fff;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        .output-container {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .output-box {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background-color: #f4f4f4;
-            padding: 15px;
-            position: relative;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            overflow-x: auto;
-        }
-
-        .output-box-label {
-            position: relative;
-            top: -1px;
-            left: 4px;
-            /*background-color: #f9f9f9;  Matches body background */
-            padding: 0 8px;
-            font-weight: bold;
-            font-size: 14px;
-            color: #333;
-        }
+        body { margin:0; font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
+        .container { display: flex; height: 100vh; }
+        .side-menu { width: 250px; background: #2f353e; color: #eee; display: flex; flex-direction: column; overflow-y: auto; }
+        .side-menu h2 { font-size: 1.2rem; margin: 20px; color: #ccc; }
+        .category { margin:0; padding:0; border-bottom:1px solid #444; }
+        .category-title { padding:10px 20px; cursor:pointer; background:#394049; font-weight:bold; user-select:none; }
+        .category-items { display:none; flex-direction:column; }
+        .category-items button { padding:10px 20px; border:none; text-align:left; background:#2f353e; color:#eee; cursor:pointer; outline:none; }
+        .category-items button:hover { background:#3f4650; }
+        .main-area { flex:1; display:flex; flex-direction:column; background:#fff; }
+        .terminal-top-bar { background:#ddd; padding:10px; display:flex; justify-content:flex-end; align-items:center; }
+        .terminal-top-bar select { padding:5px; margin-left:10px; }
+        .terminal-container { flex:1; background:#1e1e1e; display:flex; flex-direction:column; overflow:hidden; }
+        #terminal { flex:1; overflow:hidden; }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>Menu</h2>
-        <div class="category">
-            <h3 onclick="toggleCategory('cat1')">Category 1</h3>
-            <div id="cat1" class="functions">
-                <a href="#" onclick="executeCommand('/function1_1')">List Files</a>
-                <a href="#" onclick="executeCommand('/function1_2')">Show Current Directory</a>
+    <div class="container">
+        <div class="side-menu">
+            <h2>Commands</h2>
+            <div class="category">
+                <div class="category-title">Category A</div>
+                <div class="category-items">
+                    <button data-command="echo 'Hello from A1'">echo 'Hello from A1'</button>
+                    <button data-command="ls -la">ls -la</button>
+                </div>
+            </div>
+            <div class="category">
+                <div class="category-title">Category B</div>
+                <div class="category-items">
+                    <button data-command="pwd">pwd</button>
+                    <button data-command="dir">dir</button>
+                </div>
+            </div>
+            <div class="category">
+                <div class="category-title">Category C</div>
+                <div class="category-items">
+                    <button data-command="date">Item C1 (date)</button>
+                    <button data-command="uname -a">Item C2 (uname -a)</button>
+                </div>
             </div>
         </div>
-        <div class="category">
-            <h3 onclick="toggleCategory('cat2')">Category 2</h3>
-            <div id="cat2" class="functions">
-                <a href="#" onclick="executeCommand('/function2_1')">Print Hello</a>
-                <a href="#" onclick="executeCommand('/function2_2')">Show Date</a>
+        <div class="main-area">
+            <div class="terminal-top-bar">
+                <span>Choose Terminal:</span>
+                <select id="terminalSelector">
+                    {% for shell in shells %}
+                    <option value="{{ shell.name }}" {% if not shell.available %}disabled{% endif %}>
+                        {{ shell.name }}{% if not shell.available %} (unavailable){% endif %}
+                    </option>
+                    {% endfor %}
+                </select>
             </div>
-        </div>
-        <div class="category">
-            <h3 onclick="toggleCategory('cat3')">Category 3</h3>
-            <div id="cat3" class="functions">
-                <a href="#" onclick="executeCommand('/function3_1')">System Info</a>
-                <a href="#" onclick="executeCommand('/function3_2')">Disk Space</a>
-            </div>
-        </div>
-        <a href="#" style="color: #fff; text-align: center; display: block;" onclick="viewLog()">View Log</a>
-    </div>
-
-    <!-- Content Area -->
-    <div class="content">
-        <h1>Terminal interface
-            <div class="folder-container">
-                <button onclick="chooseFolder()">Choose Folder</button>
-                <span id="folder-display">No folder chosen</span>
-            </div>
-        </h1>
-        <div class="output-container">
-            <div>
-                <div class="output-box-label">Command</div>
-                <div class="output-box" id="command-output"></div>
-            </div>
-            <div>
-                <div class="output-box-label">Output</div>
-                <div class="output-box" id="stdout-output"></div>
-            </div>
-            <div>
-                <div class="output-box-label">Error</div>
-                <div class="output-box" id="stderr-output"></div>
+            <div class="terminal-container">
+                <div id="terminal"></div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
     <script>
-        let selectedFolder = "";
+        // Determine correct ws or wss
+        var protocol = (window.location.protocol === 'https:') ? 'wss://' : 'ws://';
 
-        function chooseFolder() {
-            const folder = prompt("Enter the folder path:");
-            if (folder) {
-                selectedFolder = folder;
-                document.getElementById('folder-display').innerText = folder;
+        // Toggle categories
+        document.querySelectorAll('.category-title').forEach(title => {
+            title.addEventListener('click', () => {
+                const items = title.nextElementSibling;
+                if (items.style.display === 'flex') {
+                    items.style.display = 'none';
+                } else {
+                    items.style.display = 'flex';
+                }
+            });
+        });
 
-                // Send folder to backend
-                fetch('/set_folder', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ folder: folder })
-                });
+        const term = new Terminal({ 
+            cols: 80, 
+            rows: 24, 
+            fontSize:14, 
+            theme: { background: '#1e1e1e' } 
+        });
+        term.open(document.getElementById('terminal'));
+
+        let ws;
+        let currentShell = document.getElementById('terminalSelector').value;
+
+        function connectTerminal(shellType) {
+            if (ws) ws.close();
+            ws = new WebSocket(protocol + window.location.host + "/ws");
+            ws.onopen = () => {
+                ws.send(shellType);
+            };
+            ws.onmessage = (event) => {
+                term.write(event.data);
+            };
+            ws.onclose = () => {
+                term.write("\r\n*** Disconnected from server ***\r\n");
+            };
+        }
+
+        connectTerminal(currentShell);
+
+        term.onData(data => {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(data);
             }
-        }
+        });
 
+        document.getElementById('terminalSelector').addEventListener('change', (e) => {
+            // If shell is disabled (unavailable), ignore
+            if (e.target.selectedOptions[0].disabled) {
+                alert("This shell is not available on this system.");
+                // revert to previous selection
+                e.target.value = currentShell;
+                return;
+            }
+            currentShell = e.target.value;
+            connectTerminal(currentShell);
+        });
 
-
-        // Toggle visibility of categories
-        function toggleCategory(categoryId) {
-            const category = document.getElementById(categoryId);
-            category.style.display = (category.style.display === 'block') ? 'none' : 'block';
-        }
-
-        // Execute a command and display the results
-        function executeCommand(route) {
-            fetch(route)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('command-output').innerText = data.command || "-";
-                    document.getElementById('stdout-output').innerText = data.stdout || "-";
-                    document.getElementById('stderr-output').innerText = data.stderr || "-";
-                });
-        }
-
-        // View log content
-        function viewLog() {
-            fetch('/view_log')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('command-output').innerText = "Full Log";
-                    document.getElementById('stdout-output').innerText = data.log || "No log content.";
-                    document.getElementById('stderr-output').innerText = "End of Log";
-                });
-        }
+        document.querySelectorAll('.category-items button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const command = btn.getAttribute('data-command');
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(command + "\r");
+                }
+            });
+        });
     </script>
 </body>
 </html>

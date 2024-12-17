@@ -1,135 +1,163 @@
-from flask import Flask, render_template, jsonify, request
-import subprocess
 import os
-from datetime import datetime
-import shlex
+import subprocess
+import threading
+import sys
+import shutil
 
-#just run "python app.py" in the "clean md" folder and it will work!
-
+from flask import Flask, render_template, request
+from flask_sock import Sock
 
 app = Flask(__name__)
+sock = Sock(app)
 
-# Log file for storing all commands and outputs
-LOG_FILE = "terminal_output_log.txt"
-current_folder = os.getcwd()
-is_wsl = False  # Flag to check if we're using a WSL path
+# Pre-check which shells are available.
+# This is platform-specific. We'll define a dictionary of known shells.
+if os.name == 'nt':  # Windows
+    possible_shells = {
+        "bash": "bash.exe",
+        "zsh": "zsh.exe",
+        "cmd": "cmd.exe",
+        "powershell": "powershell.exe",
+        "wsl": "wsl.exe"
+    }
+else:  # Unix-like
+    possible_shells = {
+        "bash": "/bin/bash",
+        "zsh": "/bin/zsh",
+        "cmd": "cmd.exe",          # Typically not available on Unix
+        "powershell": "powershell.exe",  # Typically not available on Unix
+        "wsl": "wsl.exe"           # Typically not available on Unix
+    }
 
-# Helper function to convert Windows paths to WSL-compatible paths
-def convert_to_wsl_path(folder):
-    """
-    Convert a Windows UNC path (\\wsl.localhost\...) to a valid WSL Linux path.
-    """
-    try:
-        result = subprocess.run(f"wsl wslpath '{folder}'", shell=True, capture_output=True, text=True)
-        if result.returncode == 0:
-            return result.stdout.strip()
-        return None
-    except Exception as e:
-        print(f"WSL path conversion error: {e}")
-        return None
-
-
-
-def execute_and_log(command):
-    """
-    Executes a command in the appropriate environment (Windows or WSL).
-    """
-    global current_folder, is_wsl
-    try:
-        if is_wsl:
-            # Execute the command in WSL with the converted path
-            safe_command = shlex.quote(command)
-            wsl_command = f"wsl bash -c \"cd '{current_folder}' && {safe_command}\""
-            result = subprocess.run(wsl_command, shell=True, text=True, capture_output=True)
+available_shells = {}
+for shell_name, shell_cmd in possible_shells.items():
+    # which will return None if not found. On Windows, for some shells, it might not work as expected.
+    # For Windows shells that aren't on PATH, this might fail. In that case, you can skip this check.
+    # As a fallback, we trust that if user wants that shell, they have it.
+    # Or we handle known Windows shells more explicitly.
+    if os.name == 'nt':
+        # On Windows, checking availability might be trickier. We'll just do a fallback:
+        # We'll try `shutil.which()` and if None, consider it unavailable.
+        if shutil.which(shell_cmd):
+            available_shells[shell_name] = shell_cmd
         else:
-            # Execute Windows commands
-            result = subprocess.run(command, shell=True, text=True, capture_output=True, cwd=current_folder)
-        
-        # Log results
-        output = f"Command: {command}\nOutput:\n{result.stdout}\nError:\n{result.stderr}\n{'='*40}\n"
-        with open(LOG_FILE, "a") as file:
-            file.write(f"Timestamp: {datetime.now()}\n{output}")
-        return {"command": command, "stdout": result.stdout, "stderr": result.stderr}
-    except Exception as e:
-        return {"command": command, "stdout": "", "stderr": str(e)}
+            # Not found, skip
+            available_shells[shell_name] = None
+    else:
+        # Unix-like: straightforward check
+        if shutil.which(shell_cmd):
+            available_shells[shell_name] = shell_cmd
+        else:
+            available_shells[shell_name] = None
 
-# Flask routes
+if os.name == 'nt':
+    import wexpect
+    def create_pty(shell_command):
+        return wexpect.spawn(shell_command)
+else:
+    import pty
+    import select
+    import fcntl
+    import struct
+    import termios
+
+    def set_winsize(fd, rows, cols, xpix=0, ypix=0):
+        winsize = struct.pack("HHHH", rows, cols, xpix, ypix)
+        fcntl.ioctl(fd, termios.TIOCSWINSZ, winsize)
+
+    def create_pty(shell_command):
+        master_fd, slave_fd = pty.openpty()
+        set_winsize(master_fd, 24, 80)
+        pid = subprocess.Popen(shell_command, stdin=slave_fd, stdout=slave_fd, stderr=slave_fd, shell=True, preexec_fn=os.setsid)
+        os.close(slave_fd)
+        return master_fd, pid
+
+
 @app.route('/')
-def home():
-    return render_template('index.html')
+def index():
+    # Prepare a list of shells and mark which are unavailable
+    shells_for_template = []
+    for s, cmd in available_shells.items():
+        # If cmd is None, shell not found
+        # We'll disable that option in the dropdown
+        shells_for_template.append({
+            'name': s,
+            'cmd': cmd if cmd else '',
+            'available': (cmd is not None)
+        })
+
+    return render_template("index.html", shells=shells_for_template)
 
 
+@sock.route('/ws')
+def terminal_ws(ws):
+    shell = ws.receive()
+    shell = shell.strip()
 
+    # Basic shell selection logic with fallback if not available
+    shell_command = available_shells.get(shell)
+    if shell_command is None:
+        # Shell not available, fallback to a known good shell
+        if os.name == 'nt':
+            shell_command = "cmd.exe"
+        else:
+            shell_command = "/bin/bash"
 
-@app.route('/set_folder', methods=['POST'])
-def set_folder():
-    """
-    Updates the current working directory, supporting both Windows and WSL paths.
-    """
-    global current_folder, is_wsl
-    data = request.get_json()
-    folder = data.get('folder', '')
+    if os.name == 'nt':
+        # Windows: wexpect approach
+        child = create_pty(shell_command)
 
-    # Handle WSL UNC paths
-    if folder.startswith("\\\\wsl.localhost") or folder.startswith("\\\\wsl$"):
-        converted_folder = convert_to_wsl_path(folder)
-        if converted_folder:
-            current_folder = converted_folder
-            is_wsl = True
-            return jsonify({"status": "success", "folder": current_folder})
-        return jsonify({"status": "error", "message": "Invalid or inaccessible WSL folder path."})
+        def reader():
+            # Set a small timeout on the child so that read_nonblocking() will raise TIMEOUT if no data
+            child.timeout = 0.05
+            while True:
+                try:
+                    out = child.read_nonblocking(size=1024)
+                    if out:
+                        # wexpect returns already-decoded strings (Unicode)
+                        ws.send(out)
+                except wexpect.TIMEOUT:
+                    continue
+                except wexpect.EOF:
+                    break
 
-    # Handle standard Windows paths
-    if os.path.exists(folder) and os.path.isdir(folder):
-        current_folder = os.path.abspath(folder)
-        is_wsl = False
-        return jsonify({"status": "success", "folder": current_folder})
+        reader_thread = threading.Thread(target=reader, daemon=True)
+        reader_thread.start()
+
+        while True:
+            msg = ws.receive()
+            if msg is None:
+                break
+            child.send(msg)
+
     else:
-        return jsonify({"status": "error", "message": "Invalid folder path."})
+        # Unix-like: original pty code
+        master_fd, process = create_pty(shell_command)
 
+        def reader():
+            while True:
+                r, w, e = select.select([master_fd], [], [], 0.01)
+                if master_fd in r:
+                    try:
+                        output = os.read(master_fd, 1024)
+                        if output:
+                            ws.send(output.decode('utf-8', 'replace'))
+                        else:
+                            break
+                    except OSError:
+                        break
 
-# Category 1 routes with sample Bash commands
-@app.route('/function1_1', methods=['GET'])
-def function1_1():
-    result = execute_and_log("ls -la")
-    return jsonify(result)
+        reader_thread = threading.Thread(target=reader, daemon=True)
+        reader_thread.start()
 
-@app.route('/function1_2', methods=['GET'])
-def function1_2():
-    result = execute_and_log("pwd")
-    return jsonify(result)
+        while True:
+            msg = ws.receive()
+            if msg is None:
+                break
+            os.write(master_fd, msg.encode('utf-8', 'replace'))
 
-# Category 2 routes
-@app.route('/function2_1', methods=['GET'])
-def function2_1():
-    result = execute_and_log("echo 'Hello World!'")
-    return jsonify(result)
-
-@app.route('/function2_2', methods=['GET'])
-def function2_2():
-    result = execute_and_log("dir")
-    return jsonify(result)
-
-# Category 3 routes
-@app.route('/function3_1', methods=['GET'])
-def function3_1():
-    result = execute_and_log("uname -a")
-    return jsonify(result)
-
-@app.route('/function3_2', methods=['GET'])
-def function3_2():
-    result = execute_and_log("df -h")
-    return jsonify(result)
-
-# Serve the log file content
-@app.route('/view_log')
-def view_log():
-    if os.path.exists(LOG_FILE):
-        with open(LOG_FILE, "r") as file:
-            content = file.read()
-        return jsonify({"log": content})
-    else:
-        return jsonify({"log": "No log file found."})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # You may need to adjust run parameters if using wss (TLS)
+    # For local testing (ws), just run as is:
+    app.run(debug=True, host='0.0.0.0', port=5000)
