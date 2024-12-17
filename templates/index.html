@@ -143,21 +143,21 @@
 
     <!-- Content Area -->
     <div class="content">
-        <h1>Terminal Output</h1>
+        <h1>Terminal interface
+            <div class="folder-container">
+                <button onclick="chooseFolder()">Choose Folder</button>
+                <span id="folder-display">No folder chosen</span>
+            </div>
+        </h1>
         <div class="output-container">
-            <!-- Command Box -->
             <div>
                 <div class="output-box-label">Command</div>
-                <div class="output-box" id="command-output">
-                    Click a menu item to execute a command.
-                </div>
+                <div class="output-box" id="command-output"></div>
             </div>
-            <!-- Output Box -->
             <div>
                 <div class="output-box-label">Output</div>
                 <div class="output-box" id="stdout-output"></div>
             </div>
-            <!-- Error Box -->
             <div>
                 <div class="output-box-label">Error</div>
                 <div class="output-box" id="stderr-output"></div>
@@ -166,6 +166,25 @@
     </div>
 
     <script>
+        let selectedFolder = "";
+
+        function chooseFolder() {
+            const folder = prompt("Enter the folder path:");
+            if (folder) {
+                selectedFolder = folder;
+                document.getElementById('folder-display').innerText = folder;
+
+                // Send folder to backend
+                fetch('/set_folder', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ folder: folder })
+                });
+            }
+        }
+
+
+
         // Toggle visibility of categories
         function toggleCategory(categoryId) {
             const category = document.getElementById(categoryId);

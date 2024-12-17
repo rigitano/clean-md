@@ -339,3 +339,782 @@ Error:
 operable program or batch file.
 
 ========================================
+Timestamp: 2024-12-17 11:11:37.459874
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:31:44.591767
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:31:47.145533
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:31:57.732981
+Command: uname -a
+Output:
+
+Error:
+'uname' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:31:59.403581
+Command: df -h
+Output:
+
+Error:
+'df' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:32:00.946347
+Command: uname -a
+Output:
+
+Error:
+'uname' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:32:57.619748
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  11:32             2,812 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  11:32             8,922 terminal_output_log.txt
+               2 File(s)         11,734 bytes
+               3 Dir(s)  17,253,351,424 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:32:57.692673
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:32:58.094121
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:32:58.418041
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  11:32             2,812 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  11:32             9,885 terminal_output_log.txt
+               2 File(s)         12,697 bytes
+               3 Dir(s)  17,252,954,112 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:32:58.729729
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  11:32             2,812 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  11:32            10,488 terminal_output_log.txt
+               2 File(s)         13,300 bytes
+               3 Dir(s)  17,252,823,040 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:33:46.554315
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:33:48.804030
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:33:50.827803
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:33:54.294891
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  11:32             2,812 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  11:33            11,661 terminal_output_log.txt
+               2 File(s)         14,473 bytes
+               3 Dir(s)  17,219,407,872 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:37:03.013692
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:37:05.544872
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:37:06.934481
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  11:32             2,812 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  11:37            12,624 terminal_output_log.txt
+               2 File(s)         15,436 bytes
+               3 Dir(s)  17,203,871,744 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:37:18.387598
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:37:19.070462
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  11:32             2,812 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  11:37            13,375 terminal_output_log.txt
+               2 File(s)         16,187 bytes
+               3 Dir(s)  17,194,242,048 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:38:01.893598
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:38:01.914915
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:38:02.051914
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  11:37             3,477 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  11:38            14,338 terminal_output_log.txt
+               2 File(s)         17,815 bytes
+               3 Dir(s)  17,194,082,304 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:38:10.198645
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  11:37             3,477 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  11:38            14,941 terminal_output_log.txt
+               2 File(s)         18,418 bytes
+               3 Dir(s)  17,201,348,608 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:42:27.649304
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:42:29.165845
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:42:31.528209
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:43:20.248103
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:43:22.947559
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:43:25.318770
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Desktop\00
+
+29/10/2024  17:55    <DIR>          .
+29/10/2024  17:55    <DIR>          ..
+29/10/2024  17:55           108,734 1.PNG
+29/10/2024  17:54            45,778 2.PNG
+29/10/2024  14:52           116,579 basic setup.PNG
+29/10/2024  14:52            58,781 ipv6.PNG
+29/10/2024  14:55            50,962 status mypage.PNG
+29/10/2024  14:54           100,295 status.PNG
+29/10/2024  14:53            94,365 vpn.PNG
+               7 File(s)        575,494 bytes
+               2 Dir(s)  17,144,614,912 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 11:44:21.297828
+Command: ls -la
+Output:
+
+Error:
+'\\wsl.localhost\Ubuntu\home\bioinformatician'
+CMD.EXE was started with the above path as the current directory.
+UNC paths are not supported.  Defaulting to Windows directory.
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 11:58:31.295791
+Command: ls -la
+Output:
+
+Error:
+/bin/bash: -c: line 1: unexpected EOF while looking for matching `''
+/bin/bash: -c: line 2: syntax error: unexpected end of file
+
+========================================
+Timestamp: 2024-12-17 11:58:44.842544
+Command: ls -la
+Output:
+
+Error:
+/bin/bash: -c: line 1: unexpected EOF while looking for matching `''
+/bin/bash: -c: line 2: syntax error: unexpected end of file
+
+========================================
+Timestamp: 2024-12-17 11:58:45.696477
+Command: pwd
+Output:
+
+Error:
+/bin/bash: -c: line 1: unexpected EOF while looking for matching `''
+/bin/bash: -c: line 2: syntax error: unexpected end of file
+
+========================================
+Timestamp: 2024-12-17 11:58:48.616288
+Command: echo 'Hello World!'
+Output:
+
+Error:
+/bin/bash: -c: line 1: unexpected EOF while looking for matching `''
+/bin/bash: -c: line 2: syntax error: unexpected end of file
+
+========================================
+Timestamp: 2024-12-17 11:58:50.686656
+Command: dir
+Output:
+
+Error:
+/bin/bash: -c: line 1: unexpected EOF while looking for matching `''
+/bin/bash: -c: line 2: syntax error: unexpected end of file
+
+========================================
+Timestamp: 2024-12-17 12:00:17.552571
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 12:00:20.640393
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 12:00:46.155208
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Desktop\00
+
+29/10/2024  17:55    <DIR>          .
+29/10/2024  17:55    <DIR>          ..
+29/10/2024  17:55           108,734 1.PNG
+29/10/2024  17:54            45,778 2.PNG
+29/10/2024  14:52           116,579 basic setup.PNG
+29/10/2024  14:52            58,781 ipv6.PNG
+29/10/2024  14:55            50,962 status mypage.PNG
+29/10/2024  14:54           100,295 status.PNG
+29/10/2024  14:53            94,365 vpn.PNG
+               7 File(s)        575,494 bytes
+               2 Dir(s)  17,181,650,944 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 12:00:54.476800
+Command: ls -la
+Output:
+
+Error:
+/bin/bash: -c: line 1: unexpected EOF while looking for matching `''
+/bin/bash: -c: line 2: syntax error: unexpected end of file
+
+========================================
+Timestamp: 2024-12-17 12:03:36.936639
+Command: ls -la
+Output:
+
+Error:
+bash: line 1: cd: C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md: No such file or directory
+
+========================================
+Timestamp: 2024-12-17 12:04:37.284122
+Command: dir
+Output:
+
+Error:
+bash: line 1: cd: C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md: No such file or directory
+
+========================================
+Timestamp: 2024-12-17 12:04:40.595406
+Command: dir
+Output:
+
+Error:
+bash: line 1: cd: C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md: No such file or directory
+
+========================================
+Timestamp: 2024-12-17 12:04:41.819073
+Command: echo 'Hello World!'
+Output:
+
+Error:
+World!"'': -c: line 1: unexpected EOF while looking for matching `"'
+World!"'': -c: line 2: syntax error: unexpected end of file
+
+========================================
+Timestamp: 2024-12-17 12:05:31.881437
+Command: ls -la
+Output:
+
+Error:
+bash: line 1: cd: C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md: No such file or directory
+
+========================================
+Timestamp: 2024-12-17 12:05:35.912789
+Command: pwd
+Output:
+
+Error:
+bash: line 1: cd: C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md: No such file or directory
+
+========================================
+Timestamp: 2024-12-17 12:05:44.919904
+Command: pwd
+Output:
+
+Error:
+bash: line 1: cd: C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md: No such file or directory
+
+========================================
+Timestamp: 2024-12-17 12:05:45.581266
+Command: ls -la
+Output:
+
+Error:
+bash: line 1: cd: C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md: No such file or directory
+
+========================================
+Timestamp: 2024-12-17 12:06:01.332120
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 12:06:03.481338
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Desktop\00
+
+29/10/2024  17:55    <DIR>          .
+29/10/2024  17:55    <DIR>          ..
+29/10/2024  17:55           108,734 1.PNG
+29/10/2024  17:54            45,778 2.PNG
+29/10/2024  14:52           116,579 basic setup.PNG
+29/10/2024  14:52            58,781 ipv6.PNG
+29/10/2024  14:55            50,962 status mypage.PNG
+29/10/2024  14:54           100,295 status.PNG
+29/10/2024  14:53            94,365 vpn.PNG
+               7 File(s)        575,494 bytes
+               2 Dir(s)  17,289,474,048 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 12:06:05.900941
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 12:06:21.859912
+Command: ls -la
+Output:
+
+Error:
+bash: line 1: cd: C:\Users\Henrique\Desktop\00: No such file or directory
+
+========================================
+Timestamp: 2024-12-17 12:06:29.372005
+Command: pwd
+Output:
+
+Error:
+bash: line 1: cd: C:\Users\Henrique\Desktop\00: No such file or directory
+
+========================================
+Timestamp: 2024-12-17 12:06:31.457223
+Command: echo 'Hello World!'
+Output:
+
+Error:
+World!"'': -c: line 1: unexpected EOF while looking for matching `"'
+World!"'': -c: line 2: syntax error: unexpected end of file
+
+========================================
+Timestamp: 2024-12-17 12:09:18.255765
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 12:09:25.509694
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 12:09:26.813510
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  12:09             4,559 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  12:09            24,413 terminal_output_log.txt
+               2 File(s)         28,972 bytes
+               3 Dir(s)  17,291,034,624 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 12:09:28.509579
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 12:09:51.996103
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  12:09             4,559 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  12:09            25,226 terminal_output_log.txt
+               2 File(s)         29,785 bytes
+               3 Dir(s)  17,290,309,632 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 12:09:54.859881
+Command: echo 'Hello World!'
+Output:
+'Hello World!'
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 12:09:55.465068
+Command: dir
+Output:
+ Volume in drive C is Windows
+ Volume Serial Number is 38A2-E8A5
+
+ Directory of C:\Users\Henrique\Minha escrivaninha VS Code\meus aplicativos\clean md
+
+17/12/2024  11:08    <DIR>          .
+17/12/2024  11:08    <DIR>          ..
+17/12/2024  12:09             4,559 app.py
+16/12/2024  22:50    <DIR>          templates
+17/12/2024  12:09            25,977 terminal_output_log.txt
+               2 File(s)         30,536 bytes
+               3 Dir(s)  17,290,178,560 bytes free
+
+Error:
+
+========================================
+Timestamp: 2024-12-17 12:53:04.446756
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 12:53:04.832236
+Command: pwd
+Output:
+
+Error:
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 12:53:04.915885
+Command: ls -la
+Output:
+
+Error:
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+========================================
+Timestamp: 2024-12-17 12:53:08.733281
+Command: echo 'Hello World!'
+Output:
+
+Error:
+World!"'': -c: line 1: unexpected EOF while looking for matching `"'
+World!"'': -c: line 2: syntax error: unexpected end of file
+
+========================================
+Timestamp: 2024-12-17 12:53:12.145131
+Command: dir
+Output:
+DFT_acetone_ocupAndFiveEmpty.molden
+DFT_amide_ocupAndFiveEmpty.molden
+DFT_ammonia_ocupAndFiveEmpty.molden
+DFT_carboxilic_acid_ocupAndFiveEmpty.molden
+DFT_cya_ocupAndFiveEmpty.molden
+DFT_etanol_ocupAndFiveEmpty.molden
+DFT_optimized_geometry_dihedral_100.05_all.molden
+DFT_optimized_geometry_dihedral_100.05_ocupAndFiveEmpty.molden
+DFT_optimized_geometry_dihedral_105.05_all.molden
+DFT_optimized_geometry_dihedral_105.05_ocupAndFiveEmpty.molden
+DFT_optimized_geometry_dihedral_110.05_all.molden
+DFT_optimized_geometry_dihedral_110.05_ocupAndFiveEmpty.molden
+DFT_optimized_geometry_dihedral_115.05_all.molden
+DFT_optimized_geometry_dihedral_115.05_ocupAndFiveEmpty.molden
+DFT_optimized_geometry_dihedral_120.05_all.molden
+DFT_optimized_geometry_dihedral_120.05_ocupAndFiveEmpty.molden
+DFT_preliminar.molden
+DFT_preliminar_ocupAndFiveEmpty.molden
+DFT_water_ocupAndFiveEmpty.molden
+HF_acetone_ocupAndFiveEmpty.molden
+HF_amide_ocupAndFiveEmpty.molden
+HF_ammonia_ocupAndFiveEmpty.molden
+HF_carboxilic_acid_ocupAndFiveEmpty.molden
+HF_etanol_ocupAndFiveEmpty.molden
+HF_water_ocupAndFiveEmpty.molden
+MD
+Untitled.ipynb
+dihedral_scan.log
+geom.xyz
+ijk.dat
+meututorial
+miniconda3
+my-building
+my-buildingCO2
+my-lysosyme
+my-martini
+my-membrana
+my-umbrelaNoAlzheimer
+optimized_geometry_dihedral_100.05.xyz
+optimized_geometry_dihedral_105.05.xyz
+optimized_geometry_dihedral_110.05.xyz
+optimized_geometry_dihedral_115.05.xyz
+optimized_geometry_dihedral_120.05.xyz
+output.dat
+psi.27732.clean
+psi4\ first\ attempt.ipynb
+see.xyz
+timer.dat
+tutoriais_gromacs
+
+Error:
+
+========================================
