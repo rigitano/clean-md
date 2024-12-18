@@ -86,7 +86,7 @@ def index():
             'available': (cmd is not None)
         })
 
-    return render_template("index.html", shells=shells_for_template, hi="o")
+    return render_template("index.html", shells=shells_for_template, hi="o",composed="echo nope")
 
 
 @sock.route('/ws')
@@ -172,7 +172,12 @@ def do_stuff():
             'available': (cmd is not None)
         })
 
-    return render_template("index.html", shells=shells_for_template, hi="i")
+    return render_template("index.html", shells=shells_for_template, hi="i",composed="echo nope")
+
+
+
+
+
 
 if __name__ == '__main__':
     # You may need to adjust run parameters if using wss (TLS)
