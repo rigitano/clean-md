@@ -38,9 +38,8 @@
                     <button data-command="xxx">see path variable (and exports to it)</button>
 
 
-
-                    <button data-command="conda env list">see all conda environments</button><!--xxx maybe I should do a script to add python and modules for each env-->
-                    <button data-command="xxx">see all pyenv environments</button>
+                    <button data-command="conda env list | awk '{print \$1}' | grep -v '^#' | while read env; do echo &quot;Environment: \$env&quot;; conda run -n &quot;\$env&quot; python --version 2>/dev/null; conda list -n &quot;\$env&quot; | awk '{print \$1 &quot;=&quot; \$2}' | grep -v '^[#@]' | tr '\n' ',' | sed 's/,\$//'; echo; done">See all Conda environments</button>
+                    <button data-command="pyenv versions --bare | while read env; do echo &quot;Environment: \$env&quot;; pyenv shell \$env && python --version; pip list --format=freeze | tr '\n' ',' | sed 's/,\$//'; echo; done">See all pyenv environments</button>
                     <button data-command="conda create -n my_env python=3.9">create new conda environment</button>
                     <button data-command="xxx">create new pyenv environment</button>
                 </div>
@@ -117,6 +116,11 @@
                 <button data-command="xxx">Gyration radius</button>
                 <button data-command="xxx">SASA</button>
                 <button data-command="xxx">Quadruopole</button>
+
+                <form action="/do-stuff" method="POST">
+                    <button type="submit">Do stuff {{ hi }}</button>
+                </form>
+                
                 
             </div>
         </div>

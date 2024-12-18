@@ -4,7 +4,7 @@ import threading
 import sys
 import shutil
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_sock import Sock
 
 app = Flask(__name__)
@@ -86,7 +86,7 @@ def index():
             'available': (cmd is not None)
         })
 
-    return render_template("index.html", shells=shells_for_template)
+    return render_template("index.html", shells=shells_for_template, hi="o")
 
 
 @sock.route('/ws')
@@ -156,6 +156,23 @@ def terminal_ws(ws):
                 break
             os.write(master_fd, msg.encode('utf-8', 'replace'))
 
+
+
+
+@app.route('/do-stuff', methods=['POST'])
+def do_stuff():
+    # Prepare a list of shells and mark which are unavailable
+    shells_for_template = []
+    for s, cmd in available_shells.items():
+        # If cmd is None, shell not found
+        # We'll disable that option in the dropdown
+        shells_for_template.append({
+            'name': s,
+            'cmd': cmd if cmd else '',
+            'available': (cmd is not None)
+        })
+
+    return render_template("index.html", shells=shells_for_template, hi="i")
 
 if __name__ == '__main__':
     # You may need to adjust run parameters if using wss (TLS)
