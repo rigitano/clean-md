@@ -115,12 +115,38 @@
 
 
             <div class="category">
-                <div class="category-title">Search filesystem</div>
+                <div class="category-title">Search for files</div>
                 <div class="category-items">
                     <button data-command='printf "%-30s %-10s %-10s %-15s\n" "Name" "Size" "Lines" "Permissions"; for file in .* *; do [ -e "$file" ] || continue; size=$(du -sh "$file" 2>/dev/null | awk "{print \$1}"); perms=$(stat -c "%A" "$file" 2>/dev/null); lines=$( [ -f "$file" ] && wc -l < "$file" || echo "N/A" ); printf "%-30s %-10s %-10s %-15s\n" "$file" "$size" "$lines" "$perms"; done'>ls (with extra infos)</button>
-                    <button data-command="find . -regex '.*sers/Henriq.*.jpg'">files by name</button>
-                    <button data-command="grep -Rl 'Henrique' .">files by content</button>
-                    <button data-command="grep -l 'Henrique' *"><b>lines</b> with certain text</button>
+                    
+                    <!-- button with input fields that will apear after click-->
+                    <button onclick="toggleVisibility(this.nextElementSibling)">by name (...)</button>
+                    <div class="hidden-input">
+                        <p class="hidden-input-label">regex:</p>
+                        <input type="text" name="word" placeholder="*enrique\.jpg" size="15" required
+                               oninput="this.nextElementSibling.setAttribute('data-command', 'find . -regextype posix-extended -regex \'.*/' + this.value.trim() + '\'')">
+                        <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
+                    </div>
+
+
+                    <!-- button with input fields that will apear after click-->
+                    <button onclick="toggleVisibility(this.nextElementSibling)">by path (...)</button>
+                    <div class="hidden-input">
+                        <p class="hidden-input-label">regex:</p>
+                        <input type="text" name="word" placeholder=".*sers/*enrique\.jpg" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'find . -regextype posix-extended -regex \'' + this.value.trim() + '\'' )">
+                        <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
+                    </div>
+
+                    
+            
+                    <!-- button with input fields that will apear after click-->
+                    <button onclick="toggleVisibility(this.nextElementSibling)">by content (...)</button>
+                    <div class="hidden-input">
+                        <p class="hidden-input-label">regex:</p>
+                        <input type="text" name="word" placeholder=".*mention lu at aprouve" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'find . -type f -print | xargs grep \'' + this.value.trim() +'\'' )">
+                        <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
+                    </div>
+                    
                 </div>
             </div>
 
