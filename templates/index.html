@@ -88,9 +88,25 @@
                         <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
                     </div>
 
-                    <!-- xxx button with input fields that will apear after click-->
-                    <button data-command="git checkout receivingBranchName && git merge givingBranchName --no-ff">xxx merge ...</button>
+                    <!-- button with input fields that will apear after click-->
+                    <button onclick="toggleVisibility(this.nextElementSibling)">merge (...)</button>
+                    <div class="hidden-input"> 
+                        <p class="hidden-input-label">source branch:</p>
+                        <input type="text" id="branch-x" name="branch-x" placeholder="#123_fix_something" size="15" required>
+                        
+                        <p class="hidden-input-label">destination branch:</p>
+                        <input type="text" id="branch-y" name="branch-y" placeholder="master" size="15" required>
+                        
+                        <button 
+                            class="hidden-input-ok" 
+                            type="button" 
+                            data-command="" 
+                            onclick="this.setAttribute('data-command', 'git checkout ' + document.getElementById('branch-y').value.trim() + ' && git merge ' + document.getElementById('branch-x').value.trim() + ' --no-ff'); console.log(this.getAttribute('data-command'));">
+                            OK
+                        </button>
+                    </div>
 
+                    
 
 
 
