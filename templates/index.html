@@ -41,13 +41,18 @@
                     <button data-command="top">running processes</button>
                     <button data-command="which python">python location</button>
                     <button data-command="pip list -v">modules locations</button>
-                    <button data-command="xxx">see path variable (and exports to it)</button>
+                    <button data-command="echo &quot;PATH directories (from current terminal):&quot; &amp;&amp; echo &quot;---------------------------------&quot; &amp;&amp; echo &quot;$PATH&quot; | tr ':' '\n' | nl">show PATH content</button>
+                    <button data-command="conda env list | tail -n +3 | awk '{print $1}' | while read env; do if [ -n &quot;$env&quot; ]; then echo &quot;Environment: $env&quot;; conda run -n &quot;$env&quot; python --version 2&gt;/dev/null; conda list -n &quot;$env&quot; | awk '{print $1&quot;=&quot;$2}' | grep -v '^[#@]' | tr '\n' ',' | sed 's/,$//'; echo; fi; done">see all conda environments</button>
+                    
+                    <!-- button with input fields that will apear after click-->
+                    <button onclick="toggleVisibility(this.nextElementSibling)">create new conda environment (...)</button>
+                      <div class="hidden-input">
+                          <p class="hidden-input-label">environment name:</p>
+                          <input type="text" name="word" placeholder="bio" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'conda create -n \'' + this.value.trim() + '\' python=3.11')">
+                          <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
+                      </div>
 
 
-                    <button data-command="conda env list | awk '{print \$1}' | grep -v '^#' | while read env; do echo &quot;Environment: \$env&quot;; conda run -n &quot;\$env&quot; python --version 2>/dev/null; conda list -n &quot;\$env&quot; | awk '{print \$1 &quot;=&quot; \$2}' | grep -v '^[#@]' | tr '\n' ',' | sed 's/,\$//'; echo; done">See all Conda environments</button>
-                    <button data-command="pyenv versions --bare | while read env; do echo &quot;Environment: \$env&quot;; pyenv shell \$env && python --version; pip list --format=freeze | tr '\n' ',' | sed 's/,\$//'; echo; done">See all pyenv environments</button>
-                    <button data-command="conda create -n my_env python=3.9">create new conda environment</button>
-                    <button data-command="xxx">create new pyenv environment</button>
                 </div>
             </div>
             <div class="category">
@@ -70,10 +75,11 @@
                     <button data-command="git push origin $(git rev-parse --abbrev-ref HEAD)">push (current branch)</button>
                     
                     <!-- button with input fields that will apear after click-->
-                    <button onclick="toggleVisibility(this.nextElementSibling)">revert or reset (...)</button>
+                    <button onclick="toggleVisibility(this.nextElementSibling)">reset (...)</button>
                       <div class="hidden-input">
-                          <p class="hidden-input-label">go back to:</p>
-                          <input type="text" name="word" placeholder="HEAD" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'git revert ' + this.value.trim() )">
+                          <p class="hidden-input-label">go back to this commit </p>
+                          <input type="text" name="word" placeholder="HEAD" size="15" required oninput="this.nextElementSibling.nextElementSibling.setAttribute('data-command', 'git reset ' + this.value.trim() + ' --hard' )">
+                          <p >ATTENTION: all posterior changes will be deleted! </p>
                           <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
                       </div>
 
@@ -88,7 +94,7 @@
                         <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
                     </div>
 
-                    <!-- button with input fields that will apear after click-->
+                    <!-- button with input fields that will apear after click. but this one have two inputs-->
                     <button onclick="toggleVisibility(this.nextElementSibling)">merge (...)</button>
                     <div class="hidden-input"> 
                         <p class="hidden-input-label">source branch:</p>
@@ -100,7 +106,7 @@
                         <button 
                             class="hidden-input-ok" 
                             type="button" 
-                            data-command="" 
+                            data-command="will change after click in the ok button" 
                             onclick="this.setAttribute('data-command', 'git checkout ' + document.getElementById('branch-y').value.trim() + ' && git merge ' + document.getElementById('branch-x').value.trim() + ' --no-ff'); console.log(this.getAttribute('data-command'));">
                             OK
                         </button>
