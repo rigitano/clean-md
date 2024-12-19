@@ -20,9 +20,12 @@
         .terminal-top-bar select { padding:5px; margin-left:10px; }
         .terminal-container { flex:1; background:#1e1e1e; display:flex; flex-direction:column; overflow:hidden; }
         #terminal { flex:1; overflow:hidden; }
-        #hidden-input {display: none; margin-left: 25px; } 
-        .form-label {font-size: 11px; color: #1b1b1b; margin: 0px; display: block;
-  }
+        .hidden-input {display: none; margin-left: 25px; padding:10px 10px; background:#6c7076;} 
+        .hidden-input-label {font-size: 12px; color: #373737; margin: 0px; display: block;}
+        .hidden-input button {padding:2px 4px; color:#eee; background: #373737}
+        .hidden-input button:hover { background:#3f4650; }
+            
+  
     </style>
 </head>
 <body>
@@ -57,10 +60,10 @@
 
                     <!-- button with input fields that will apear after click-->
                     <button onclick="toggleVisibility(this.nextElementSibling)">add, commit (...)</button>
-                      <div id="hidden-input">
-                          <p class="form-label">commit message:</p>
+                      <div class="hidden-input">
+                          <p class="hidden-input-label">commit message:</p>
                           <input type="text" name="word" placeholder="" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'git add . && git commit -m \'' + this.value.trim() + '\'')">
-                          <button type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
+                          <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
                       </div>
 
                     <!--button that will send bash code directly-->
@@ -68,10 +71,10 @@
                     
                     <!-- button with input fields that will apear after click-->
                     <button onclick="toggleVisibility(this.nextElementSibling)">revert or reset (...)</button>
-                      <div id="hidden-input">
-                          <p class="form-label">commit to go back to:</p>
+                      <div class="hidden-input">
+                          <p class="hidden-input-label">go back to:</p>
                           <input type="text" name="word" placeholder="HEAD" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'git revert ' + this.value.trim() )">
-                          <button type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
+                          <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
                       </div>
 
                     <!--button that will send bash code directly-->
@@ -79,10 +82,10 @@
 
                     <!-- button with input fields that will apear after click-->
                     <button onclick="toggleVisibility(this.nextElementSibling)">create new branch (...)</button>
-                    <div id="hidden-input">
-                        <p class="form-label">name of the new branch:</p>
+                    <div class="hidden-input">
+                        <p class="hidden-input-label">new branch name:</p>
                         <input type="text" name="word" placeholder="#123_fix_something" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'git branch ' + this.value.trim() )">
-                        <button type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
+                        <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
                     </div>
 
                     <!-- xxx button with input fields that will apear after click-->
@@ -254,7 +257,8 @@
             });
         });
 
-        // Toggle visibility og an item imputs
+
+        // Toggle visibility og an item inputs
         function toggleVisibility(element) {
         if (element.style.display === 'none' || element.style.display === '') {
         element.style.display = 'block';
