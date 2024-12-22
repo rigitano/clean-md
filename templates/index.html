@@ -220,14 +220,7 @@
         </div>
         <div class="main-area">
             <div class="terminal-top-bar">
-                <span>Choose Terminal:</span>
-                <select id="terminalSelector">
-                    {% for shell in shells %}
-                    <option value="{{ shell.name }}" {% if not shell.available %}disabled{% endif %}>
-                        {{ shell.name }}{% if not shell.available %} (unavailable){% endif %}
-                    </option>
-                    {% endfor %}
-                </select>
+
             </div>
             <div class="terminal-container">
                 <div id="terminal"></div>
@@ -235,68 +228,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
-    <script>
-        // Determine correct protocol dynamically for WebSocket
-        const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-        const wsUrl = protocol + window.location.host + "/ws";
-
-        // Terminal initialization
-        const term = new Terminal({
-            cols: 80,
-            rows: 24,
-            fontSize: 14,
-            theme: { background: '#1e1e1e', foreground: '#ffffff' }
-        });
-        term.open(document.getElementById('terminal'));
-
-        let ws;
-        let currentShell = document.getElementById('terminalSelector').value;
-
-        function connectTerminal(shellType) {
-            if (ws) ws.close();
-            ws = new WebSocket(wsUrl);
-
-            ws.onopen = () => {
-                ws.send(shellType);
-                term.write(`\r\nConnected to ${shellType} shell\r\n`);
-            };
-
-            ws.onmessage = (event) => {
-                term.write(event.data);
-            };
-
-            ws.onclose = () => {
-                term.write("\r\n*** Disconnected from server ***\r\n");
-            };
-        }
-
-        connectTerminal(currentShell);
-
-        term.onData(data => {
-            if (ws && ws.readyState === WebSocket.OPEN) {
-                ws.send(data);
-            }
-        });
-
-        document.getElementById('terminalSelector').addEventListener('change', (e) => {
-            const selectedShell = e.target.value;
-            currentShell = selectedShell;
-            connectTerminal(currentShell);
-        });
-
-        // Safeguard for empty or invalid commands
-        document.querySelectorAll('.category-items button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const command = btn.getAttribute('data-command');
-                if (command && ws && ws.readyState === WebSocket.OPEN) {
-                    ws.send(command + "\r");
-                } else {
-                    console.error("Invalid command or WebSocket not open");
-                }
-            });
-        });
-
+    <script >
+ 
         // Toggle category visibility
         document.querySelectorAll('.category-title').forEach(title => {
             title.addEventListener('click', () => {
