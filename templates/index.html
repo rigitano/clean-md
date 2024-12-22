@@ -235,8 +235,16 @@
                     <button data-command="xxx">Gyration radius</button>
                     <button data-command="xxx">SASA</button>
                     <button data-command="xxx">Quadruopole</button>
-                    <button onclick="sendCommand('fobic_are_yellow_and_philic_are_purple.tcl')">Representation 1</button>
-    
+                </div>
+            </div>
+
+
+            <div class="category">
+                <div class="category-title">VMD visualisation</div>
+                <div class="category-items">
+                    <button onclick="executeCommand(this)" real-command='vmd -e scripts_for_vmd/start_server.tcl'>Launch VMD</button>
+                    <button onclick="executeCommand(this)" real-command='scripts_for_vmd/fobic_are_yellow_and_philic_are_purple.py'>Representation 1</button>
+                </div>
 
                     
                     
@@ -267,17 +275,7 @@
     </div>
 
     <script>
-        // Copy to clipboard functionality
-        document.querySelectorAll('button[data-command]').forEach(button => {
-            button.addEventListener('click', () => {
-                const command = button.getAttribute('data-command');
-                navigator.clipboard.writeText(command).then(() => {
-                    alert(`Copied to clipboard: ${command}`);
-                }).catch(err => {
-                    console.error('Failed to copy command: ', err);
-                });
-            });
-        });
+
 
         // Toggle visibility of category items
         document.querySelectorAll('.category-title').forEach(title => {
@@ -297,11 +295,35 @@
         }
 
 
-        function sendCommand(command) {
-            fetch(`http://localhost:5000/run?script=${command}`)
-                .then(response => response.text())
-                .then(data => console.log(data))
-                .catch(err => console.error("Error:", err));
+        // Copy to clipboard functionality
+        document.querySelectorAll('button[data-command]').forEach(button => {
+            button.addEventListener('click', () => {
+                const command = button.getAttribute('data-command');
+                navigator.clipboard.writeText(command).then(() => {
+                    alert(`Copied to clipboard: ${command}`);
+                }).catch(err => {
+                    console.error('Failed to copy command: ', err);
+                });
+            });
+        });
+
+        // Execute command in terminal functionality
+        function executeCommand(button) {
+            const command = button.getAttribute('real-command');
+            fetch('/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ command: command })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Command Output: ' + data.output);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     </script>
 </body>
