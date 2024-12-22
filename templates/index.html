@@ -40,6 +40,7 @@
             <div class="category">
                 <div class="category-title">Environment</div>
                 <div class="category-items">
+
                     <button data-command="echo hello">echo hello</button>
                     <button data-command="uname -a">os version</button>
                     <button data-command="ifconfig">ip and mac</button>
@@ -49,7 +50,7 @@
                     <button data-command="echo &quot;PATH directories (from current terminal):&quot; &amp;&amp; echo &quot;---------------------------------&quot; &amp;&amp; echo &quot;$PATH&quot; | tr ':' '\n' | nl">show PATH content</button>
                     <button data-command="conda env list | tail -n +3 | awk '{print $1}' | while read env; do if [ -n &quot;$env&quot; ]; then echo &quot;Environment: $env&quot;; conda run -n &quot;$env&quot; python --version 2&gt;/dev/null; conda list -n &quot;$env&quot; | awk '{print $1&quot;=&quot;$2}' | grep -v '^[#@]' | tr '\n' ',' | sed 's/,$//'; echo; fi; done">see all conda environments</button>
                     
-                    <!-- button with input fields that will apear after click-->
+                    <!-- button with 1 input-->
                     <button onclick="toggleVisibility(this.nextElementSibling)">create new conda environment (...)</button>
                       <div class="hidden-input">
                           <p class="hidden-input-label">environment name:</p>
@@ -64,11 +65,18 @@
                 <div class="category-title">GIT</div>
                 <div class="category-items">
                     
+                     <!--button -->
                     <button data-command="git init |||||| git clone xxx">init or clone</button>
                     
-                    <button data-command="xxx">pull</button>
+                    <!-- button with 1 input-->
+                    <button onclick="toggleVisibility(this.nextElementSibling)">pull (...)</button>
+                      <div class="hidden-input">
+                          <p class="hidden-input-label">branch to pull from github to here:</p>
+                          <input type="text" name="word" placeholder="main" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'git pull origin \'' + this.value.trim() + '\'')">
+                          <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
+                      </div>
 
-                    <!-- button with input fields that will apear after click-->
+                    <!-- button with 1 input-->
                     <button onclick="toggleVisibility(this.nextElementSibling)">add, commit (...)</button>
                       <div class="hidden-input">
                           <p class="hidden-input-label">commit message:</p>
@@ -76,10 +84,22 @@
                           <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
                       </div>
 
-                    <!--button that will send bash code directly-->
-                    <button data-command="git push origin $(git rev-parse --abbrev-ref HEAD)">push (current branch)</button>
+                     <!-- button with 1 input-->
+                     <button onclick="toggleVisibility(this.nextElementSibling)">add, commit to new branch (...)</button>
+                     <div class="hidden-input">
+                         <p class="hidden-input-label">new branch name:</p>
+                         <input type="text" name="word" placeholder="#123_fix_something" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'git checkout -b ' + this.value.trim() + ' && git add . && git commit -m \'first commit of new branch\'' )">
+                         <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
+                     </div>
+
+                     <button onclick="toggleVisibility(this.nextElementSibling)">push (...)</button>
+                     <div class="hidden-input">
+                         <p class="hidden-input-label">branch to push from hete to github:</p>
+                         <input type="text" name="word" placeholder="main" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'git push origin \'' + this.value.trim() + '\'')">
+                         <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
+                     </div>
                     
-                    <!-- button with input fields that will apear after click-->
+                    <!-- button with 1 input-->
                     <button onclick="toggleVisibility(this.nextElementSibling)">reset (...)</button>
                       <div class="hidden-input">
                           <p class="hidden-input-label">go back to this commit </p>
@@ -88,18 +108,21 @@
                           <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
                       </div>
 
-                    <!--button that will send bash code directly-->
+                     <!--button -->
                     <button data-command="git branch">see all branches</button>
 
-                    <!-- button with input fields that will apear after click-->
-                    <button onclick="toggleVisibility(this.nextElementSibling)">create new branch (...)</button>
+                    <!-- button with 1 input-->
+                    <button onclick="toggleVisibility(this.nextElementSibling)">change branch (...)</button>
                     <div class="hidden-input">
-                        <p class="hidden-input-label">new branch name:</p>
-                        <input type="text" name="word" placeholder="#123_fix_something" size="15" required oninput="this.nextElementSibling.setAttribute('data-command', 'git branch ' + this.value.trim() )">
+                        <p class="hidden-input-label">branch to go to:</p>
+                        <input type="text" name="word" placeholder="#123_fix_something" size="15" required oninput="this.nextElementSibling.nextElementSibling.setAttribute('data-command', 'git add . && git commit -m \'safety commit prior to branch change\' && git branch ' + this.value.trim() )">
+                        <p>will commit before change branch to avoid taking any changes there</p>
                         <button class="hidden-input-ok" type="submit" data-command="this will be replaced after user types on the imput above">OK</button>
                     </div>
 
-                    <!-- button with input fields that will apear after click. but this one have two inputs-->
+
+
+                    <!-- button with 2 inputs-->
                     <button onclick="toggleVisibility(this.nextElementSibling)">merge (...)</button>
                     <div class="hidden-input"> 
                         <p class="hidden-input-label">source branch:</p>
@@ -213,9 +236,7 @@
                     <button data-command="xxx">SASA</button>
                     <button data-command="xxx">Quadruopole</button>
     
-                    <form action="/do-stuff" method="POST">
-                        <button type="submit">Do stuff {{ hi }}</button>
-                    </form>
+
                     
                     
                 </div>
