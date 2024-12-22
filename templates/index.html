@@ -235,6 +235,7 @@
                     <button data-command="xxx">Gyration radius</button>
                     <button data-command="xxx">SASA</button>
                     <button data-command="xxx">Quadruopole</button>
+                    <button onclick="sendCommand('fobic_are_yellow_and_philic_are_purple.tcl')">Representation 1</button>
     
 
                     
@@ -293,6 +294,14 @@
         } else {
         element.style.display = 'none';
         }
+        }
+
+
+        function sendCommand(command) {
+            fetch(`http://localhost:5000/run?script=${command}`)
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(err => console.error("Error:", err));
         }
     </script>
 </body>
