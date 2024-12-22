@@ -1,8 +1,15 @@
-from flask import Flask, request
+from flask import Flask, request, request, jsonify, render_template
 import socket
+import subprocess
+import os
 
 app = Flask(__name__)
 
+
+@app.route('/')
+def index():
+    # Render the main page
+    return render_template('index.html')
 
 # Function to send a command to a terminal. Im using only for VMD for now
 @app.route('/execute', methods=['POST'])
