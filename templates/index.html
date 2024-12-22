@@ -6,10 +6,17 @@
     <title>Web Terminal</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
     <style>
-        body { margin:0; font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
+        body { margin: 0; font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
         .container { display: flex; height: 100vh; }
-        .side-menu { width: 250px; background: #2f353e; color: #eee; display: flex; flex-direction: column; overflow-y: auto; }
-        .side-menu h2 { font-size: 1.2rem; margin: 20px; color: #ccc; }
+        .menu-stripe { width: 16.66%; display: flex; flex-direction: column; overflow-y: auto; }
+        .menu-stripe:nth-child(1) { background: #2f353e; color: #eee; }
+        .menu-stripe:nth-child(2) { background: #3e474f; color: #eee; }
+        .menu-stripe:nth-child(3) { background: #4e5960; color: #eee; }
+        .menu-stripe:nth-child(4) { background: #5d6a71; color: #eee; }
+        .menu-stripe:nth-child(5) { background: #6d7b82; color: #eee; }
+        .menu-stripe:nth-child(6) { background: #7d8d94; color: #eee; }
+
+        .menu-stripe h2 { font-size: 1.2rem; margin: 20px; color: #ccc; }
         .category { margin:0; padding:0; border-bottom:1px solid #444; }
         .category-title { padding:10px 20px; cursor:pointer; background:#394049; font-weight:bold; user-select:none; }
         .category-items { display:none; flex-direction:column; }
@@ -19,19 +26,17 @@
         .terminal-top-bar { background:#ddd; padding:10px; display:flex; justify-content:flex-end; align-items:center; }
         .terminal-top-bar select { padding:5px; margin-left:10px; }
         .terminal-container { flex:1; background:#1e1e1e; display:flex; flex-direction:column; overflow:hidden; }
-        #terminal { flex:1; overflow:hidden; }
         .hidden-input {display: none; margin-left: 25px; padding:10px 10px; background:#6c7076;} 
         .hidden-input-label {font-size: 12px; color: #373737; margin: 0px; display: block;}
         .hidden-input button {padding:2px 4px; color:#eee; background: #373737}
         .hidden-input button:hover { background:#3f4650; }
-            
-  
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="side-menu">
-            <h2>Commands</h2>
+        <div class="menu-stripe">
+            <h2>Informatics</h2>
+            
             <div class="category">
                 <div class="category-title">Environment</div>
                 <div class="category-items">
@@ -155,89 +160,110 @@
                     
                 </div>
             </div>
+        </div>
 
 
-
+        
+        <div class="menu-stripe">
+            <h2>Structural Biochem</h2>
             <div class="category">
-            <div class="category-title">Construct Molecules</div>
-            <div class="category-items">
-                <button data-command="xxx">download_and_clean_pdb</button>
-                <button data-command="xxx">xxx create_line</button>
-                <button data-command="xxx">xxx create_tape</button>
-                <button data-command="xxx">xxx create_christal</button>
-                <button data-command="xxx">create_peptide</button>
-                <button data-command="xxx">xxx create_any_molecule</button>
-
+                <div class="category-title">Construct Molecules</div>
+                <div class="category-items">
+                    <button data-command="xxx">download_and_clean_pdb</button>
+                    <button data-command="xxx">xxx create_line</button>
+                    <button data-command="xxx">xxx create_tape</button>
+                    <button data-command="xxx">xxx create_christal</button>
+                    <button data-command="xxx">create_peptide</button>
+                    <button data-command="xxx">xxx create_any_molecule</button>
+    
+                </div>
             </div>
-        </div>
-
-        <div class="category">
-            <div class="category-title">Construct MD System</div>
-            <div class="category-items">
-                <button data-command="xxx">pdb2molecule_in_solvent</button>
-                <button data-command="xxx">void2peptide_in_solvent</button>
-                <button data-command="xxx">pdb2molecule_in_membrane xxx</button>
-                <button data-command="xxx">pdb2filled_box</button>
-
+    
+            <div class="category">
+                <div class="category-title">Construct MD System</div>
+                <div class="category-items">
+                    <button data-command="xxx">pdb2molecule_in_solvent</button>
+                    <button data-command="xxx">void2peptide_in_solvent</button>
+                    <button data-command="xxx">pdb2molecule_in_membrane xxx</button>
+                    <button data-command="xxx">pdb2filled_box</button>
+    
+                </div>
             </div>
-        </div>
-
-        <div class="category">
-            <div class="category-title">Run MD</div>
-            <div class="category-items">
-                <button data-command="xxx">make_realistic</button>
-                <button data-command="xxx">xxx run to see trajectories</button>
-                <button data-command="xxx">xxx run FEP</button>
-
+    
+            <div class="category">
+                <div class="category-title">Run MD</div>
+                <div class="category-items">
+                    <button data-command="xxx">make_realistic</button>
+                    <button data-command="xxx">xxx run to see trajectories</button>
+                    <button data-command="xxx">xxx run FEP</button>
+    
+                </div>
             </div>
+    
+            <div class="category">
+                <div class="category-title">MD Analysis</div>
+                <div class="category-items">
+                    <button data-command="xxx">Ramachandran plot</button>
+                    <button data-command="xxx">DSSP</button>
+                    <button data-command="xxx">H bonds</button>
+                    <button data-command="xxx">Distance between 2 atoms</button>
+                    <button data-command="xxx">Aminoacid phi and psi</button>
+                    <button data-command="xxx">RMSD with respect to a reference</button>
+                    <button data-command="xxx">Gyration radius</button>
+                    <button data-command="xxx">SASA</button>
+                    <button data-command="xxx">Quadruopole</button>
+    
+                    <form action="/do-stuff" method="POST">
+                        <button type="submit">Do stuff {{ hi }}</button>
+                    </form>
+                    
+                    
+                </div>
+        </div>
         </div>
 
-        <div class="category">
-            <div class="category-title">MD Analysis</div>
-            <div class="category-items">
-                <button data-command="xxx">Ramachandran plot</button>
-                <button data-command="xxx">DSSP</button>
-                <button data-command="xxx">H bonds</button>
-                <button data-command="xxx">Distance between 2 atoms</button>
-                <button data-command="xxx">Aminoacid phi and psi</button>
-                <button data-command="xxx">RMSD with respect to a reference</button>
-                <button data-command="xxx">Gyration radius</button>
-                <button data-command="xxx">SASA</button>
-                <button data-command="xxx">Quadruopole</button>
-
-                <form action="/do-stuff" method="POST">
-                    <button type="submit">Do stuff {{ hi }}</button>
-                </form>
-                
-                
-            </div>
+        <div class="menu-stripe">
+            <h2>3</h2>
+        </div>
+        <div class="menu-stripe">
+            <h2>4</h2>
+        </div>
+        <div class="menu-stripe">
+            <h2>5</h2>
+        </div>
+        <div class="menu-stripe">
+            <h2>6</h2>
         </div>
 
-
-
-
-            
-        </div>
+        <!-- Main Terminal Area -->
         <div class="main-area">
-            <div class="terminal-top-bar">
-
-            </div>
+            <div class="terminal-top-bar"></div>
             <div class="terminal-container">
                 <div id="terminal"></div>
             </div>
         </div>
     </div>
 
-    <script >
- 
-        // Toggle category visibility
-        document.querySelectorAll('.category-title').forEach(title => {
-            title.addEventListener('click', () => {
-                const items = title.nextElementSibling;
-                items.style.display = (items.style.display === 'flex') ? 'none' : 'flex';
+    <script>
+        // Copy to clipboard functionality
+        document.querySelectorAll('button[data-command]').forEach(button => {
+            button.addEventListener('click', () => {
+                const command = button.getAttribute('data-command');
+                navigator.clipboard.writeText(command).then(() => {
+                    alert(`Copied to clipboard: ${command}`);
+                }).catch(err => {
+                    console.error('Failed to copy command: ', err);
+                });
             });
         });
 
+        // Toggle visibility of category items
+        document.querySelectorAll('.category-title').forEach(title => {
+            title.addEventListener('click', () => {
+                const items = title.nextElementSibling;
+                items.style.display = items.style.display === 'flex' ? 'none' : 'flex';
+            });
+        });
 
         // Toggle visibility og an item inputs
         function toggleVisibility(element) {
@@ -246,9 +272,7 @@
         } else {
         element.style.display = 'none';
         }
-}
-
-
+        }
     </script>
 </body>
 </html>
