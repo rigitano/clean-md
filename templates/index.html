@@ -242,20 +242,20 @@
             <div class="category">
                 <div class="category-title">VMD visualisation</div>
                 <div class="category-items">
-                    <button onclick="executeCommand(this)" real-command='vmd -e scripts_for_vmd/start_server.tcl'>*Launch VMD with socket*</button>
+                    <button onclick="executeCommandInTerminal(this)" real-command='vmd -e scripts_for_vmd/start_server.tcl'>*Launch VMD with socket*</button>
                     
-                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Inspect names</button>
+                    <button onclick="executeTclScriptInVMDConsole(this)" tcl-location='./scripts_for_vmd/inspect_names_of_residues_in_molecule.tcl'>Inspect resnames</button>
                     
-                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Default (cartoon with licorice)</button>
-                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Goodsell blob</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/xxx.tcl'>Default (cartoon with licorice)</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/xxx.tcl'>Goodsell blob</button>
 
-                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Secondary Structure</button>
-                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Electrostatic Potential</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/xxx.tcl'>Secondary Structure</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/xxx.tcl'>Electrostatic Potential</button>
 
-                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/fobic_are_yellow_and_philic_are_purple.py'>Hydophilic x Hydrophobic</button>
-                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Hbonds near protein</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/fobic_are_yellow_and_philic_are_purple.tcl'>Hydophilic x Hydrophobic</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/hbond_between_proteins_and_solvent.tcl'>Hbonds near protein</button>
 
-                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>xxx</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/xxx.tcl'>xxx</button>
                 </div>
 
                     
@@ -317,10 +317,10 @@
             });
         });
 
-        //FUNCTIONALITY 2: Execute command in terminal
-        function executeCommand(button) {
+        //FUNCTIONALITY 2: Execute command in terminal (app.py will be called to actually do it)
+        function executeCommandInTerminal(button) {
             const command = button.getAttribute('real-command');
-            fetch('/execute', {
+            fetch('/execute_terminal', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -329,12 +329,34 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert('Command Output: ' + data.output);
+                alert(data.output);
             })
             .catch(error => {
                 console.error('Error:', error);
             });
         }
+
+        //FUNCTIONALITY 3: Execute script in vmd cosole, available as a socked (app.py will be called to actually do it)
+        function executeScriptInVMDConsole(button) {
+            const scriptlocation = button.getAttribute('script-location');
+            fetch('/execute_vmdconsole', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ scriptlocation: scriptlocation })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.output);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+
+
     </script>
 </body>
 </html>
