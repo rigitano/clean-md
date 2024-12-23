@@ -203,7 +203,7 @@
             </div>
     
             <div class="category">
-                <div class="category-title">Construct MD System</div>
+                <div class="category-title">Construct System</div>
                 <div class="category-items">
                     <button data-command="xxx">pdb2molecule_in_solvent</button>
                     <button data-command="xxx">void2peptide_in_solvent</button>
@@ -214,7 +214,7 @@
             </div>
     
             <div class="category">
-                <div class="category-title">Run MD</div>
+                <div class="category-title">MD Run</div>
                 <div class="category-items">
                     <button data-command="xxx">make_realistic</button>
                     <button data-command="xxx">xxx run to see trajectories</button>
@@ -242,13 +242,19 @@
             <div class="category">
                 <div class="category-title">VMD visualisation</div>
                 <div class="category-items">
-                    <button onclick="executeCommand(this)" real-command='vmd -e scripts_for_vmd/start_server.tcl'>Launch VMD with socket</button>
+                    <button onclick="executeCommand(this)" real-command='vmd -e scripts_for_vmd/start_server.tcl'>*Launch VMD with socket*</button>
+                    
+                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Inspect names</button>
+                    
                     <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Default (cartoon with licorice)</button>
                     <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Goodsell blob</button>
-                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/fobic_are_yellow_and_philic_are_purple.py'>Hydophilic x Hydrophobic</button>
-                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Hbonds near protein</button>
+
                     <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Secondary Structure</button>
                     <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Electrostatic Potential</button>
+
+                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/fobic_are_yellow_and_philic_are_purple.py'>Hydophilic x Hydrophobic</button>
+                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Hbonds near protein</button>
+
                     <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>xxx</button>
                 </div>
 
