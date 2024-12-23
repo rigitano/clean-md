@@ -242,15 +242,20 @@
             <div class="category">
                 <div class="category-title">VMD visualisation</div>
                 <div class="category-items">
-                    <button onclick="executeCommand(this)" real-command='vmd -e scripts_for_vmd/start_server.tcl'>Launch VMD</button>
-                    <button onclick="executeCommand(this)" real-command='scripts_for_vmd/fobic_are_yellow_and_philic_are_purple.py'>Representation 1</button>
+                    <button onclick="executeCommand(this)" real-command='vmd -e scripts_for_vmd/start_server.tcl'>Launch VMD with socket</button>
+                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Default (cartoon with licorice)</button>
+                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Goodsell blob</button>
+                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/fobic_are_yellow_and_philic_are_purple.py'>Hydophilic x Hydrophobic</button>
+                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Hbonds near protein</button>
+                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Secondary Structure</button>
+                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>Electrostatic Potential</button>
+                    <button onclick="executeCommand(this)" real-command='python ./scripts_for_vmd/xxx.py'>xxx</button>
                 </div>
 
                     
-                    
                 </div>
         </div>
-        </div>
+        
 
         <div class="menu-stripe">
             <h2>3</h2>
@@ -294,8 +299,7 @@
         }
         }
 
-
-        // Copy to clipboard functionality
+        //FUNCTIONALITY 1: Copy to clipboard
         document.querySelectorAll('button[data-command]').forEach(button => {
             button.addEventListener('click', () => {
                 const command = button.getAttribute('data-command');
@@ -307,7 +311,7 @@
             });
         });
 
-        // Execute command in terminal functionality
+        //FUNCTIONALITY 2: Execute command in terminal
         function executeCommand(button) {
             const command = button.getAttribute('real-command');
             fetch('/execute', {

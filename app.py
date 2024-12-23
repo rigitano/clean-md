@@ -19,12 +19,12 @@ def execute_command():
 
     if not command:
         return jsonify({'error': 'No command provided'}), 400
+    else:
+        print("command sent to app.py to be run: <" + command +">")
 
     try:
-        # Execute the command securely
-        # Example: Replace with an actual Python script execution
-        result = subprocess.run(['python3', command], capture_output=True, text=True, check=True)
-        return jsonify({'output': result.stdout})
+        result = subprocess.run(command, capture_output=True, text=True, check=True)#command execution!
+        return jsonify({'output': "EXCECUTED COMMAND:" + command})
     except subprocess.CalledProcessError as e:
         return jsonify({'error': 'Command failed', 'details': e.stderr}), 500
     except Exception as e:
