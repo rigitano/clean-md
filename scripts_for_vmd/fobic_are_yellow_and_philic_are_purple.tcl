@@ -1,4 +1,10 @@
-
+#delete all current representations
+set num_reps [molinfo top get numreps]
+for {set i 0} {$i < $num_reps} {incr i} {
+    mol delrep 0 top
+}
+    
+    
     # Create representation for hydrophobic residues (yelow licorice)
     mol addrep top
     mol modselect 0 top "resname ALA VAL LEU ILE MET PHE TRP PRO"

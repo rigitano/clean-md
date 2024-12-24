@@ -44,7 +44,7 @@ def execute_command_vmdconsole():
         print("script location sent to app.py to be exectuted in vmd console: <" + scriptlocation +">")
 
     try:
-
+        '''
         #read a text file, and return a list of the lines in the file, ignoring empty lines and lines starting with #
         with open(scriptlocation, 'r') as file:
             commands = [line.strip() for line in file if line.strip() and not line.strip().startswith('#')]
@@ -56,7 +56,12 @@ def execute_command_vmdconsole():
                 sock.sendall(command.encode('utf-8') + b'\n')
                 response = sock.recv(1024)
                 print("Response:", response.decode('utf-8'))
-
+        '''
+        with socket.create_connection(("localhost", 5555)) as sock:
+            command = "source " + scriptlocation
+            sock.sendall(command.encode('utf-8') + b'\n')
+            response = sock.recv(1024)
+            print("Response:", response.decode('utf-8'))
 
         return jsonify({'output': "EXCECUTED SCRIPT: <" + scriptlocation +">"})
     except subprocess.CalledProcessError as e:

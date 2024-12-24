@@ -244,13 +244,13 @@
                 <div class="category-items">
                     <button onclick="executeCommandInTerminal(this)" real-command='vmd -e scripts_for_vmd/start_server.tcl'>*Launch VMD with socket*</button>
                     
-                    <button onclick="executeTclScriptInVMDConsole(this)" tcl-location='./scripts_for_vmd/inspect_names_of_residues_in_molecule.tcl'>Inspect resnames xxx doesnt work </button> <!--doesnt work because its not a line by line script. i has some functions-->
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/inspect_names_of_residues_in_molecule.tcl'>Inspect resnames xxx doesnt work </button> <!--doesnt work because its not a line by line script. i has some functions-->
                     
-                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/xxx.tcl'>Default (cartoon with licorice)</button>
-                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/xxx.tcl'>Goodsell blob</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/dafault_cartoon_and_licorice.tcl'>Default (cartoon with licorice)</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/goodsell_blob.tcl'>Goodsell blob</button>
 
-                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/xxx.tcl'>Secondary Structure</button>
-                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/xxx.tcl'>Electrostatic Potential</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/secondary_structure.tcl'>Secondary Structure</button>
+                    <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/eletrostatic_surface_using_just_aminoacid_info.tcl'>Electrostatic Potential</button>
 
                     <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/fobic_are_yellow_and_philic_are_purple.tcl'>Hydophilic x Hydrophobic</button>
                     <button onclick="executeScriptInVMDConsole(this)" script-location='./scripts_for_vmd/hbond_between_proteins_and_solvent.tcl'>Hbonds near protein</button>
