@@ -30,10 +30,14 @@ mol addrep top
 
 #SELECTED IS RED
 
-# Beta strands (Extended beta)
-mol color ColorID 1 ;# red
+# The selection
+set text "(resname PRO CYS) or (name CA) or (element S) or (index 1 2 3)"
+
+
+# represent selection as red Licorice
+mol selection $text
 mol representation Licorice
-mol selection {(resname PRO CYS) or (name CA) or (element S) or (index 1 2 3)}
+mol color ColorID 1 ;# red
 mol material Opaque
 mol addrep top
 
@@ -41,3 +45,15 @@ mol addrep top
 
 
 
+# Write index file, to use the selection in gromacs. xxx I dont know if index starts at 0, if they are the same, or if formatting is necessary inside the ndx file
+
+set sel [atomselect top $text]
+set ch [open "custom_selection2.ndx" w]
+puts $ch [$sel get index]
+close $ch
+
+
+
+# Clean up
+$sel delete
+$ch delete
