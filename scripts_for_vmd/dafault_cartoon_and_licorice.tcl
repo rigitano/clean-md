@@ -6,14 +6,14 @@ for {set i 0} {$i < $num_reps} {incr i} {
     
 
 # See protein as licorice
-mol selection "protein"
+mol selection {protein}
 mol representation Licorice
 mol color Type ;# by atom type
 mol material Opaque
 mol addrep top
 
 # Add a cartoon representation for the backbone
-mol selection "protein"
+mol selection {protein}
 mol representation NewCartoon
 mol color ColorID 2 ;# grey
 mol material Opaque

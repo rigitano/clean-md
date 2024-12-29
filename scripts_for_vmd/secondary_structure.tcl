@@ -1,64 +1,98 @@
-#delete all current representations
+# Delete all current representations
 set num_reps [molinfo top get numreps]
 for {set i 0} {$i < $num_reps} {incr i} {
     mol delrep 0 top
 }
-    
 
 
-# Add a cartoon representation for the backbone
-mol selection "all"
-mol representation NewCartoon
 
-mol selection "extended_beta"
-mol color ColorID 1 ;# Red
-mol material Opaque
-mol addrep top
 
-mol selection "bridge_beta" #Single hydrogen-bonded beta-strand pairs
+# Colors for each type of secondary structure
+
+
+# Beta strands (Extended beta)
 mol color ColorID 4 ;# yellow
+mol representation NewCartoon
+mol selection {backbone and extended_beta}
 mol material Opaque
 mol addrep top
 
-#now, colores for each type of scructure
-mol selection "alpha_helix"
-mol color ColorID 0 ;# Blue
+# Beta strands (Bridge beta)
+mol representation NewCartoon
+mol color ColorID 17 ;# pale yellow
+mol material Opaque
+mol selection {backbone and bridge_beta}; # Single hydrogen-bonded beta-strand pairs
+mol addrep top
+
+# Alpha helices
+mol representation NewCartoon
+mol selection {backbone and alpha_helix}
+mol color ColorID 1 ;# red
 mol material Opaque
 mol addrep top
 
-mol selection "helix_3_10"
-mol color ColorID 10 ;# cyan
+# 3-10 helices
+mol representation NewCartoon
+mol selection {backbone and helix_3_10}
+mol color ColorID 9 ;# pink
 mol material Opaque
 mol addrep top
 
-mol selection "pi_helix"
+
+# Pi helices
+mol representation NewCartoon
+mol selection {backbone and pi_helix}
+mol color ColorID 13 ;# mauve
+mol material Opaque
+mol addrep top
+
+
+# Coils (Unstructured random regions)
+mol representation NewCartoon
+mol selection {backbone and coil}
+mol color ColorID 2 ;# gray
+mol material Opaque
+mol addrep top
+
+# Turns ( Change direction by a well-defined pattern of H bonds)
+mol representation NewCartoon
+mol selection {backbone and turn}
 mol color ColorID 11 ;# purple
 mol material Opaque
 mol addrep top
 
-mol selection "coil" # Unstructured random regions
-mol color ColorID 8 ;# white
-mol material Opaque
-mol addrep top
-
-mol selection "turn" # change direction by a well defined pattern of h bonds
-mol color ColorID 17 ;# pale yellow
-mol material Opaque
-mol addrep top
 
 
-#now highlight some important aminoacids
 
-# Prolines
+
+
+
+
+
+
+# Now highlight some important amino acids
+
+# Prolines as orange
 mol representation Licorice
-mol selection "resname PRO"
-mol color ColorID 7 ;# green
-mol material Opaque
-mol addrep top
-
-# Cysteines
-mol representation Licorice
-mol selection "resname CYS"
+mol selection {resname PRO}
 mol color ColorID 3 ;# orange
 mol material Opaque
 mol addrep top
+
+
+# Cysteines (backbone and side chains)
+mol representation Licorice
+mol selection {resname CYS}
+mol color ColorID 2 ;# gray
+mol material Opaque
+mol addrep top
+
+mol representation VDW
+mol color Name
+mol selection {element S}
+mol material Opaque
+mol addrep top
+
+
+
+
