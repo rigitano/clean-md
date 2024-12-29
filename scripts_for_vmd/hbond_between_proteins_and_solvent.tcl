@@ -28,7 +28,7 @@ mol material Opaque
 mol addrep top
 
 # Visualize hydrogen bonds using Hbonds drawing method
-mol selection {protein}
+mol selection {protein or (not protein within 3.5 of protein)}
 mol representation Hbonds
 mol color ColorID 27 ;# magenta
 mol material Opaque
